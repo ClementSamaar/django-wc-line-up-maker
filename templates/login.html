@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - Login{% endblock %}
+{% block h1 %}Login{% endblock %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Login">
+    </form>
+{% endblock %}

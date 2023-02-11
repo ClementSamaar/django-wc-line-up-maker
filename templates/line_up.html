@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - LineUps{% endblock %}
+{% block h1 %}Your LineUps{% endblock %}
+{% block content %}
+    <main>
+        <a href="{% url 'line_up_form' %}"><button>Create a new line-up</button></a>
+        <table>
+        <tr>
+            <th>Name</th>
+            <th>Squad</th>
+            <th>Formation</th>
+        </tr>
+        {% for line_up in line_up_list %}
+            <tr>
+                <td><a href="{% url 'line_up' line_up.pk %}">{{ line_up.name }}</a></td>
+                <td>{{ line_up.squad }}</td>
+                <td>{{ line_up.formation }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </main>
+{% endblock %}

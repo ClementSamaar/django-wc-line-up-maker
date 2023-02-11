@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - Create a formation{% endblock %}
+{% block h1 %}Create a template for {{ formation }}{% endblock %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ def_formset.management_form }}
+        <h2>Back positions</h2>
+        {% for form in def_formset %}
+            {{ form }}<hr>
+        {% endfor %}
+        <br>
+        <h2>Midfield positions</h2>
+        {{ mid_formset.management_form }}
+        {% for form in mid_formset %}
+            {{ form }}<hr>
+        {% endfor %}
+        <br>
+        <h2>Forward positions</h2>
+        {{ for_formset.management_form }}
+        {% for form in for_formset %}
+            {{ form }}<hr>
+        {% endfor %}
+        <br>
+        <input type="submit" value="Submit the formation template">
+    </form>
+{% endblock %}

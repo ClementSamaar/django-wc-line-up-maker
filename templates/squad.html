@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - Squads{% endblock %}
+{% block h1 %}Squads{% endblock %}
+{% block content %}
+    <ul>
+        {% for squad in squad_list %}
+            <li><a href="{% url 'squad' squad.pk %}">{{ squad }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

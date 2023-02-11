@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - {{ line_up }}{% endblock %}
+{% block h1 %}{{ line_up }}{% endblock %}
+{% block content %}
+    <ul>
+    {% for line_up_template_obj in line_up_template %}
+        <li>{{ line_up_template_obj.position }} - {{ line_up_template_obj.player }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - Create a line up template{% endblock %}
+{% block h1 %}Create a template for {{ line_up }}{% endblock %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {% for form in formset %}
+            {{ form }}<hr>
+        {% endfor %}
+        <input type="submit" value="Submit the line up template">
+    </form>
+    <script>
+
+    </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - Formation{% endblock %}
+{% block h1 %}Formation{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'formation_form' %}">Create a formation</a>
+    {% endif %}
+    {% regroup formation_list by creator as formation_group_list %}
+    {% for formation_group in formation_group_list %}
+        {% if formation_group.grouper == admin_user %}
+            <section>
+                <h2>Default formations</h2>
+                <ul>
+                    {% for formation in formation_group.list %}
+                        <li><a href="{% url 'formation' formation.pk %}">{{ formation }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+        {% if formation_group.grouper == user and not formation_group.grouper == admin_user %}
+            <section>
+                <h2>Personalized formations</h2>
+                <ul>
+                    {% for formation in formation_group.list %}
+                        <li><a href="{% url 'formation' formation.pk %}">{{ formation }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

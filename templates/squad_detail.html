@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - {{ squad }}{% endblock %}
+{% block h1 %}{{ squad }}{% endblock %}
+{% block content %}
+    <h2>Player List</h2>
+    {% for player in squad.player.all %}
+        <p><a>{{ player }}</a></p>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - Create a formation{% endblock %}
+{% block h1 %}Create a formation{% endblock %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Create line up">
+    </form>
+{% endblock %}
