@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.forms import inlineformset_factory, ModelChoiceField
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, FormView
+from django.urls import reverse
+from django.views.generic import ListView, DetailView, FormView, DeleteView
 
 from wc_line_up_maker.form.formation import FormationForm, FormationTemplateForm
 from wc_line_up_maker.models.formation import Formation
@@ -27,6 +28,12 @@ class FormationDetailView(DetailView):
     model = Formation
 
 
+class FormationDeleteView(LoginRequiredMixin, DeleteView):
+    model = Formation
+    success_url = '/'
+    template_name = 'formation_delete.html'
+
+
 class FormationFormView(LoginRequiredMixin, FormView):
     template_name = "formation_form.html"
     form_class = FormationForm
@@ -39,7 +46,7 @@ class FormationFormView(LoginRequiredMixin, FormView):
                                              midfielder_number=form.cleaned_data['midfielder_number'],
                                              forward_number=form.cleaned_data['forward_number'])
 
-        return HttpResponseRedirect('/formation/template/create/' + str(formation.pk))
+        return HttpResponseRedirect(reverse('formation_template_form', args=[str(formation.pk)]))
 
 
 @login_required
@@ -88,8 +95,14 @@ def create_formation_template(request, pk):
             def_formset.save()
             mid_formset.save()
             for_formset.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(reverse('index'))
         else:
+            for form in def_formset:
+                form.fields['position'].queryset = def_pos_queryset
+            for form in mid_formset:
+                form.fields['position'].queryset = mid_pos_queryset
+            for form in for_formset:
+                form.fields['position'].queryset = for_pos_queryset
             return render(request,
                           'formation_template_form.html',
                           {'def_errors': def_formset.errors,

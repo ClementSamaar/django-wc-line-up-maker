@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block title %}WC LineUp - Delete {{ formation_delete }}{% endblock %}
+{% block h1 %}Delete {{ formation_delete }}{% endblock %}
+{% block content %}
+    <div class="m-3">
+        <form method="POST">
+            {% csrf_token %}
+            <p>You are about to delete this formation : {{ formation_delete }}</p>
+            <input type="submit" value="Delete !">
+        </form>
+    </div>
+{% endblock %}

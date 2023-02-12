@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import FormView
 
 from wc_line_up_maker.form.register import RegisterForm
@@ -15,4 +16,4 @@ class RegisterFormView(FormView):
                                    username=form.cleaned_data['username'],
                                    password=make_password(form.cleaned_data['password']))
 
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect(reverse('index'))

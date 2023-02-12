@@ -2,8 +2,12 @@
 {% block title %}WC LineUp - {{ squad }}{% endblock %}
 {% block h1 %}{{ squad }}{% endblock %}
 {% block content %}
-    <h2>Player List</h2>
-    {% for player in squad.player.all %}
-        <p><a>{{ player }}</a></p>
-    {% endfor %}
+    <h2 class="ms-5">Player List</h2>
+    <div class="container-fluid">
+        <ul class="list-group list-group-flush m-3 ms-4">
+            {% for player in squad.player.all %}
+                <li class="list-group-item"><a>{{ player }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

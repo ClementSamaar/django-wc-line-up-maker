@@ -10,4 +10,4 @@ class Squad(models.Model):
     #players = models.ManyToManyField(to=Player, related_name='squad')
 
     def __str__(self):
-        return f"{self.name} - {self.country} {self.flag}"
+        return f"{self.name} - {self.country}"

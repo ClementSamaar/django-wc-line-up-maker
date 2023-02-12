@@ -1,16 +1,34 @@
 {% extends 'layout.html' %}
 {% block title %}WC LineUp - Home{% endblock %}
-{% block h1 %}Home{% endblock %}
 {% block content %}
-<div>
-    <p>It's good to see you, {{ user.username }}</p>
-</div>
-<div>
-    <h2>Welcome to World Cup Line-Up Maker</h2>
-    <p>
-        Here, you can create your own lines-ups of the 2022 World Cup teams. For now there are only 8 teams available.
-        For your line-ups you can use the basic formations that we've created but also create your own formations templates.
-
-    </p>
+<div class="h-75 d-flex flex-column justify-content-center">
+    <div class="d-flex flex-column container-xl  align-items-lg-center mb-5">
+        <h1>Home</h1>
+        {% if user.is_authenticated %}
+        <p>It's good to see you, {{ user.username }}
+        {% endif %}
+    </div>
+    <div class="d-flex flex-column container-xl">
+        <div class="container-xl">
+            <h2>Welcome to World Cup Line-Up Maker</h2>
+            <p>
+                Here, you can create your own lines-ups of the 2022 World Cup teams. For now there are only 8 teams available.
+                For your lines-ups you can use the basic formations that we've created but also create your own formations templates.
+                Also, the lines-ups that you are going to create are public, they can be seen by any visitor of the website.
+            </p>
+        </div>
+        <div class="container-xl">
+            <h2>How to create a formation and a line-up</h2>
+            <p>
+                As mentioned before, here, you are able to create formations and lines-ups. To create both of these, you will first
+                create the overall definition of the formation/line-up. For a formation, it means to define the number of players at
+                each game area (attack, midfield, defense) and also an optional additionnal information about the formation. For a line-up
+                you'll have to define its name, the squad and the formation that you want to use. The second step is to create the template. For a formation,
+                a template allows the user to choose the positions of the formation. For a line-up, you have to define each player position based on the
+                formation you chose. If you haven't created a template for a formation or a line-up you can create or modifying it anytime by going on its
+                detailed page.
+            </p>
+        </div>
+    </div>
 </div>
 {% endblock %}

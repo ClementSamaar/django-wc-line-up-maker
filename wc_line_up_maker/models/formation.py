@@ -10,4 +10,8 @@ class Formation(models.Model):
     defender_number = models.IntegerField(null=False, blank=True, default=0)
 
     def __str__(self):
-        return f"{self.defender_number}-{self.midfielder_number}-{self.forward_number} {self.additionnal_info}"
+        str = f"{self.defender_number}-{self.midfielder_number}-{self.forward_number} "
+        if self.additionnal_info is not None:
+            str = str + f"{self.additionnal_info}"
+
+        return str

@@ -3,28 +3,34 @@
 {% block h1 %}Formation{% endblock %}
 {% block content %}
     {% if user.is_authenticated %}
-        <a href="{% url 'formation_form' %}">Create a formation</a>
+        <div class="container-fluid ms-4 mb-4">
+            <a href="{% url 'formation_form' %}">Create a formation</a>
+        </div>
     {% endif %}
     {% regroup formation_list by creator as formation_group_list %}
     {% for formation_group in formation_group_list %}
         {% if formation_group.grouper == admin_user %}
-            <section>
-                <h2>Default formations</h2>
-                <ul>
-                    {% for formation in formation_group.list %}
-                        <li><a href="{% url 'formation' formation.pk %}">{{ formation }}</a></li>
-                    {% endfor %}
-                </ul>
+            <section class="container-fluid">
+                <h2 class="ms-4">Default formations</h2>
+                <div class="container-fluid">
+                    <ul class="list-group ms-3 mb-5">
+                        {% for formation in formation_group.list %}
+                            <li class="list-group-item"><a href="{% url 'formation' formation.pk %}">{{ formation }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </section>
         {% endif %}
         {% if formation_group.grouper == user and not formation_group.grouper == admin_user %}
-            <section>
-                <h2>Personalized formations</h2>
-                <ul>
-                    {% for formation in formation_group.list %}
-                        <li><a href="{% url 'formation' formation.pk %}">{{ formation }}</a></li>
-                    {% endfor %}
-                </ul>
+            <section class="container-fluid">
+                <h2 class="ms-4">Personalized formations</h2>
+                <div class="container-fluid">
+                    <ul class="list-group m-3">
+                        {% for formation in formation_group.list %}
+                            <li class="list-group-item"><a href="{% url 'formation' formation.pk %}">{{ formation }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </section>
         {% endif %}
     {% endfor %}

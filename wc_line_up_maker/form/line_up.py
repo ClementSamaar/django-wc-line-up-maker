@@ -1,8 +1,14 @@
+from collections import OrderedDict
+
 from django import forms
 from django.contrib.auth.models import User
 from django.db.models import Q
+from pkg_resources import _
 
 from wc_line_up_maker.models.formation import Formation
+from wc_line_up_maker.models.line_up import LineUp
+from wc_line_up_maker.models.line_up_template import LineUpTemplate
+from wc_line_up_maker.models.position import Position
 from wc_line_up_maker.models.squad import Squad
 
 
@@ -16,7 +22,7 @@ class LineUpForm(forms.Form):
         super().__init__(*args, **kwargs)
         admin = User.objects.get(id=1)
         current_user = self.request.user
-        formation_queryset = Formation.objects.filter(Q(creator=admin) & Q(creator=current_user))
+        formation_queryset = Formation.objects.filter(Q(creator=admin) | Q(creator=current_user))
         self.fields['formation'].queryset = formation_queryset
 
     def clean(self):

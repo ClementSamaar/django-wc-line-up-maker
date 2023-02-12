@@ -2,21 +2,26 @@
 {% block title %}WC LineUp - LineUps{% endblock %}
 {% block h1 %}Your LineUps{% endblock %}
 {% block content %}
-    <main>
-        <a href="{% url 'line_up_form' %}"><button>Create a new line-up</button></a>
-        <table>
+    <div>
+        <div class="container-fluid ms-4 mb-4">
+            <a href="{% url 'line_up_form' %}">Create a new line-up</a>
+        </div>
+        <table class="table m-4">
         <tr>
-            <th>Name</th>
-            <th>Squad</th>
-            <th>Formation</th>
+            <th scope="col">Name</th>
+            <th scope="col">Squad</th>
+            <th scope="col">Formation</th>
         </tr>
         {% for line_up in line_up_list %}
-            <tr>
-                <td><a href="{% url 'line_up' line_up.pk %}">{{ line_up.name }}</a></td>
-                <td>{{ line_up.squad }}</td>
-                <td>{{ line_up.formation }}</td>
-            </tr>
+            {% if line_up.creator == user %}
+                <tr>
+                    <td><a href="{% url 'line_up' line_up.pk %}">{{ line_up.name }}</a></td>
+                    <td>{{ line_up.squad }}</td>
+                    <td>{{ line_up.formation }}</td>
+                </tr>
+            {% endif %}
+
         {% endfor %}
         </table>
-    </main>
+    </div>
 {% endblock %}

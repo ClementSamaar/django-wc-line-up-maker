@@ -2,9 +2,12 @@
 {% block title %}WC LineUp - {{ line_up }}{% endblock %}
 {% block h1 %}{{ line_up }}{% endblock %}
 {% block content %}
-    <ul>
+    <div class="container-fluid ms-4 mb-4">
+        <a href="{% url 'line_up_template_form' line_up.pk %}">Modify the line-up template</a>
+    </div>
+    <ul class="list-group list-group-flush ms-3">
     {% for line_up_template_obj in line_up_template %}
-        <li>{{ line_up_template_obj.position }} - {{ line_up_template_obj.player }}</li>
+        <li class="list-group-item">{{ line_up_template_obj.position }} - {{ line_up_template_obj.player }}</li>
     {% endfor %}
     </ul>
 {% endblock %}

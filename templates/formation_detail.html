@@ -2,10 +2,15 @@
 {% block title %}WC LineUp - {{ formation }}{% endblock %}
 {% block h1 %}{{ formation }}{% endblock %}
 {% block content %}
-    <a href="{% url 'formation_template_form' formation.pk %}">Modify the formation template</a>
-    <ul>
-    {% for position in formation.formation_template.all %}
-        <li>{{ position }}</li>
-    {% endfor %}
-    </ul>
+    <div class="container-fluid ms-4 mb-4">
+        <a href="{% url 'formation_template_form' formation.pk %}">Modify the formation template</a>
+        <a href="{% url 'formation_delete' formation.pk %}">Delete this formation</a>
+    </div>
+    <div class="container-fluid">
+        <ul class="list-group list-group-flush m-3">
+        {% for position in formation.formation_template.all %}
+            <li class="list-group-item">{{ position }}</li>
+        {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
